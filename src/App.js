@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
-//import './App.css';
-
-import FunctionContextComponent from './FunctionContextComponent';
-import ClassContextComponent from './ClassContextComponent';
-
-export const ThemeContext = React.createContext();
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route} from 'react-router-dom';
+import Home from './components/Home';
+import AddUser from './components/AddUser';
+import EditUser from './components/EditUser';
 
 
 
 function App() {
-
-  const [darkTheme, setDarkTheme] = useState(true);
-
-  function toggleTheme() {
-    setDarkTheme(prevDarkTheme => !prevDarkTheme);
-  }
-
   return (
-    <div className="app">
-      <ThemeContext.Provider value={darkTheme}>
-        <button onClick={toggleTheme}>{darkTheme ? 'ToggleTheme Dark' : 'ToggleTheme Light' }</button>
-        <ClassContextComponent/>
-        <FunctionContextComponent/>
-        
-      
-      </ThemeContext.Provider>
-    
+    <div style={{ maxWidth: "30rem", margin: "4rem auto"}}>
+      <Router>
+        <h2>Nab Bar</h2>
+        <Switch>
+
+          <Route exact path="/" component={Home}/>
+          <Route path="/add" component={AddUser}/>
+          <Route path="/edit/:id" component={EditUser}/>
+         
+        </Switch>
+     </Router>
     </div>
   );
 }
